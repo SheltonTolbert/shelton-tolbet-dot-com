@@ -1,0 +1,60 @@
+#!/bin/bash
+
+MEDIA_FOLDER="./public"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && cd "../out/" && pwd)"
+
+# FTP server details
+FTP_HOST="ftp.sheltontolbert.com"
+FTP_USERNAME="admin@sheltontolbert.com"
+FTP_PASSWORD="p_yoNsne@Lc["
+
+# Remote folder on the FTP server to upload files to
+REMOTE_FOLDER="/public_html/"
+
+# Change directory to the local folder
+cd "$SCRIPT_DIR"
+
+pwd
+# Function to upload a file
+upload_file() {
+  local local_file=$1
+  local remote_path=$2
+
+  ftp -n "$FTP_HOST" <<END_SCRIPT
+    quote USER "$FTP_USERNAME"
+    quote PASS "$FTP_PASSWORD"
+    binary
+    cd "$REMOTE_FOLDER"
+    lcd "$(dirname "$local_file")"
+    put "$(basename "$local_file")" "$remote_path"
+    quit
+END_SCRIPT
+}
+
+# Function to upload a folder recursively
+upload_folder() {
+  local local_folder=$1
+  local remote_path=$2
+
+  cd "$local_folder"
+
+  # Iterate over each item in the local folder
+  for item in *; do
+    if [ -f "$item" ]; then
+      # Upload the file
+      upload_file "$item" "$remote_path"
+    elif [ -d "$item" ]; then
+      # Upload the subfolder recursively
+      upload_folder "$item" "$remote_path/$(basename "$item")"
+    fi
+  done
+
+  cd ..
+}
+
+# Get the absolute path of the current working directory
+cwd=$(pwd)
+
+# Upload files and folders recursively in the current working directory
+ upload_folder "$cwd" "$REMOTE_FOLDER"
+

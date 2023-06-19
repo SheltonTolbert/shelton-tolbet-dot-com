@@ -1,0 +1,33 @@
+#!/bin/bash
+
+MEDIA_FOLDER="./public"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && cd "../$MEDIA_FOLDER/" && pwd)"
+
+# FTP server details
+FTP_HOST="ftp.sheltontolbert.com"
+FTP_USERNAME="admin@sheltontolbert.com"
+FTP_PASSWORD="p_yoNsne@Lc["
+
+# Remote folder on the FTP server to upload files to
+REMOTE_FOLDER="/public_html/media/"
+
+# Change directory to the local folder
+cd "$SCRIPT_DIR"
+
+
+# Iterate over each file in the local folder
+for file in *; do
+  # Check if the current item is a file
+  if [ -f "$file" ]; then
+    # Upload the file to the FTP server
+    echo "Uploading $file..."
+    ftp -n "$FTP_HOST" <<END_SCRIPT
+quote USER "$FTP_USERNAME"
+quote PASS "$FTP_PASSWORD"
+binary
+cd "$REMOTE_FOLDER"
+put "$file"
+quit
+END_SCRIPT
+  fi
+done

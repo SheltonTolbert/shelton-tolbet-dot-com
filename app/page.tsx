@@ -71,11 +71,10 @@ function HeadShot() {
   return (
     <div className="z-10 w-full max-w-5xl items-center justify-center font-mono text-sm flex">
       <Image
-        src="/headshot.png"
+        src="/media/headshot.png"
         alt="Hello, I'm me!"
         width={150}
         height={24}
-        priority
       />
     </div>
   );
