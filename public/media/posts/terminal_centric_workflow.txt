@@ -1,0 +1,170 @@
+TODO: 
+- delete $EDITOR
+- unalias dev 
+
+Title: Terminal-Centric Workflow: Embracing Efficiency and Productivity
+
+I. Introduction
+
+  A. My body hurts
+    ![three monitor setup]() 
+    When I started at dscout I was a three monitor mouse hero.
+    My workflow consisted of vscode on one monitor, a chrome instance on another, and slack on the last. 
+    I remember setting it up thinking "dang, this is cool".
+    I probably lived with that setup for about 6 months or so before I realized that I was starting to feel a lot of neck pain .
+    Physical therapists first question was "what do you do for a living?", quickly followed by "how many monitors do you use?".
+    Yikes.
+
+  B. Do it in the terminal
+    Around the same time that I was starting to question my pro-gamer setup I was doing a lot or pairing with a vim user.
+    It didn't take me long to realize that she was executing on actions as a pace that I could not replicate given my workflow.
+    In addition to the lightning fast pace, she was also able to do a lot of things without leaving the terminal.
+    Actions like moving and deleting files, managing servers, executing git actions, and even interacting with other applications were all done without leaving the terminal.
+    It was all a bit over my head at the time, but I knew that I wanted to learn more.
+
+
+II. Neovim: The Gateway Drug
+  
+   A. Benefits of using a terminal-based code editor
+    The first thing I wanted to do was learn to write code in the terminal. I had heard of vim and even had a bit of expeience using it writing commit messages.
+    I did a bit of research and settled on neovim as my editor of choice.
+    Off the bat I want to make it clear that it is not my intention to convince you to use neovim, the choice is up to you. 
+    What I will say is that there are a number of tradeoffs to consider with deciding to make the move;
+
+    
+    - Benefits of using Neovim over VS Code:
+      - Lightweight and Fast
+        - vscode is built on electron, which is a framework for building desktop apps using web technologies.
+          electron is infamous for being a resource hog, and vscode is no exception.
+        - Neovim is built on top of vim, which is a text editor that has been around since the 70s.
+          It is extremely lightweight and fast but can begin to bloat as you add plugins.
+      - Terminal Integration
+        - Pairing Neovim with tmux and you can do just about anything without leaving the terminal.
+      - Extensibility and Customization
+        - linting, formatting, and git integration are all available in neovim via plugins. 
+          I have found that the plugins available for neovim are more customizable and easier to configure than those available for vscode.
+          If I find a need for a feature that is not available in a plugin, I can write easily write my own plugin with lua.
+      - Modal Editing
+        - vim bindings exist in vscode, but they are not as robust as those available in neovim.
+          I have also found that the vim bindings in vscode are not as performant as those available in neovim.
+      - Efficient Keyboard Shortcuts
+    
+    - Drawbacks of using Neovim over VS Code:
+      - Learning Curve
+        - It's steep
+      - Limited Visual Interface
+        - mouse don't work
+      - Initial Setup and Configuration
+        - vscode is ready to go out of the box, neovim is not.
+          projects such as spacevim will help you get up and running quickly, 
+          but I personally found it too intimidating to learn both the vim defaults
+          in addition to spacevim configurations and opted to build my own config from scratch.
+      - Integrated Development Environment (IDE) Features
+        - debugging
+      - Configuration learning curve is steep and sucsptible to rot
+    
+
+III. Terminal Management with Tmux
+
+  There is nothing more frustrating that having a bunch of terminal windows (or tabs) open and having to navigate between them.
+  Not only do tabs and windows take up valuable screen real estate, but they also require you to remember what each tab/window is for.
+  When I started using neovim I was managing you terminal sessions with iTerm2. 
+  I had a tab for my editing in dendra, one for editing in soma, an occasional axon tab, a tab for my servers, and a tab for linting, running tests,  and git actions.
+
+   A. Overview of Tmux and its purpose
+    Tmux is a terminal multiplexer that allows you to manage multiple terminal sessions from a single window.
+    let's break down what that means;
+      - terminal: It's a terminal, it allows you to execute commands on your computer.
+      - multiplexer: a device that combines several signals for transmission over a single medium.
+      - terminal multiplexer: a device that combines several terminal sessions for transmission over a single terminal window.
+   B. Managing windows, panes, and sessions efficiently
+   C. tmux scripting
+    - tmuxinator
+
+IV. Additional Benefits to a Terminal-Centric Workflow
+  
+  A. Terminal-centric workflow is more portable
+    - tmux and neovim can be used on just about any machine - this includes remote servers
+    - configuration files are super portable with tools like dotbot
+  C. Terminal-centric workflow is modular
+    - by nature of their design, terminal applications are more modular than their desktop counterparts
+      this allows you to easliy pipe the output of one application into another, or even chain multiple applications together to solve complex problems
+  D. One Screen Rule Them all, and while you're traveling, not make you less productive
+    - also your neck won't hurt so much (anecdotal)
+  E. You're going to find yourself in a terminal situation eventually, so you may as well get comfortable with it 
+    - two places that I regularly find myself in a terminal situation:
+      - ssh'ing into a server
+      - git 
+  
+Now let's do some fun things in the terminal
+
+IV. Scripting Tmux to open servers with a single command
+  - tmuxinator
+    - tmuxinator is a tool that allows you to script tmux sessions
+
+    brew install tmuxinator
+
+    tmuxinator uses $EDITOR 
+    export EDITOR='vim'
+
+    use tmux 1.8 or later, with the exception of 2.5
+
+    create a new tmuxinator project with 
+    tmuxinator new <project name>
+
+    ```
+    name: dev
+    root: ~/repos/dscout/
+
+    windows: 
+      - servers: 
+        # you can choose between 5 preset layouts or define your own 
+        layout: tiled
+
+        panes: 
+          - cd ./apps/axon; axon
+          - cd ./apps/dendra; yarn start
+          - cd ./apps/soma; soma
+          - 
+
+      - dendra: cd ./apps/dendra
+      - axon: cd ./apps/axon
+    ```
+
+VI. Github browsing with gh
+  
+
+IV. Jira Actions with the Jira CLI
+   A. Streamlining Jira workflow using the Jira CLI
+   B. Creating, updating, and managing Jira issues from the terminal
+   C. Automating repetitive Jira tasks using scripts and commands
+
+V. GitHub Pull Request Management with the GitHub CLI
+   A. Introduction to the GitHub CLI and its advantages
+   B. Managing pull requests, branches, and repositories using the CLI
+   C. Integrating the GitHub CLI into the development workflow
+   D. Collaborating with team members efficiently through the CLI
+
+VI. Using the GPT CLI instead of Stack Overflow
+   A. Leveraging the power of the GPT CLI for code-related queries
+   B. Exploring the features and capabilities of the GPT CLI
+   C. Advantages of using the GPT CLI over traditional search engines
+   D. Incorporating the GPT CLI into the developer's toolkit
+
+VII. Code Review with the Octo.nvim Plugin
+   A. Introduction to the Octo.nvim plugin for code review on GitHub
+   B. Reviewing and commenting on code directly from the terminal
+   C. Integrating code review into the development workflow with Octo.nvim
+   D. Enhancing collaboration and code quality through efficient code review
+
+VIII. Additional Recommendations for a Terminal-Centric Workflow
+   A. Command-line tools for testing and debugging
+   B. Terminal-based productivity tools and utilities
+   C. Customizing the terminal environment for a personalized workflow
+   D. Exploring other terminal-centric alternatives to GUI-based tools
+
+IX. Conclusion
+   A. Recap of the benefits and advantages of a terminal-centric workflow
+   B. Encouraging developers to embrace the efficiency and productivity gains
+   C. Final thoughts and encouragement to experiment with new tools and workflows
+

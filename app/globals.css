@@ -10,18 +10,42 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
+    --foreground-rgb: 255, 243, 202;
+    --background-start-rgb: 4, 13, 0;
     --background-end-rgb: 0, 0, 0;
   }
 }
 
+a {
+  border-bottom: 1px solid;
+  padding: 0 0.5rem 0 0;
+  text-decoration-line: underline;
+  text-decoration-thickness: 2px;
+}
+
+.blur {
+  filter: blur(1.25px);
+  -webkit-filter: blur(1.25px);
+}
+
+.blur:hover {
+  transition: all 0.9s ease-in-out;
+  filter: blur(0.75px);
+  -webkit-filter: blur(0.75px);
+}
+
+.blur-s {
+  filter: blur(0.5px);
+  -webkit-filter: blur(0.5px);
+}
+
+.blur-s:hover {
+  transition: all 0.9s ease-in-out;
+  filter: blur(0.25px);
+  -webkit-filter: blur(0.25px);
+}
+
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: rgb(var(--background-start-rgb));
 }
