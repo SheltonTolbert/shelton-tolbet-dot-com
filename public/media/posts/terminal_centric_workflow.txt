@@ -132,30 +132,72 @@ IV. Scripting Tmux to open servers with a single command
     ```
 
 VI. Github browsing with gh
+    gh cli defaults to nano, I prefer vim
+
+    ```
+    gh config set editor vim
+
+    ```
+
+    make some changes and commit to barnch
+
+    now let's open up a pr
   
+    ```
+    gh pr create
+
+    $Title: <title>
+    - The best PR title
+
+    $Body: <body>
+    # you can choose from pr templates here
+    # you can press 'e' to open up the body in your configured editor
+    - This is the best PR body 
+
+    # now you can add metadata such as labels, assignees, and reviewers
+    # finish up the flow and submit the pr
+    ```
+
+    gh cli is pretty cool, but it's honestly not super useful on its own.
+    like most things in the terminal, it's real power comes from being able to utilize it in a software
+    
+    gh extensions
+
+
+    ```
+    gh extension install dlvhdr/gh-dash
+
+    ```
+
+    now we can browse github from the terminal
+
+    ```
+    gh dash
+
+    ```
+
+    extensions open up a whole new world of possibilities for the terminal
+    but there are still some missing pieces.
+
+    let's take it one step further and learn how to properly perform a code review in the terminal
+    using the poser of vim 
+  
+VII. Code Review with the Octo.nvim Plugin
+   A. Introduction to the Octo.nvim plugin for code review on GitHub
+   B. Reviewing and commenting on code directly from the terminal
+   C. Integrating code review into the development workflow with Octo.nvim
+   D. Enhancing collaboration and code quality through efficient code review
 
 IV. Jira Actions with the Jira CLI
    A. Streamlining Jira workflow using the Jira CLI
    B. Creating, updating, and managing Jira issues from the terminal
    C. Automating repetitive Jira tasks using scripts and commands
 
-V. GitHub Pull Request Management with the GitHub CLI
-   A. Introduction to the GitHub CLI and its advantages
-   B. Managing pull requests, branches, and repositories using the CLI
-   C. Integrating the GitHub CLI into the development workflow
-   D. Collaborating with team members efficiently through the CLI
-
 VI. Using the GPT CLI instead of Stack Overflow
    A. Leveraging the power of the GPT CLI for code-related queries
    B. Exploring the features and capabilities of the GPT CLI
    C. Advantages of using the GPT CLI over traditional search engines
    D. Incorporating the GPT CLI into the developer's toolkit
-
-VII. Code Review with the Octo.nvim Plugin
-   A. Introduction to the Octo.nvim plugin for code review on GitHub
-   B. Reviewing and commenting on code directly from the terminal
-   C. Integrating code review into the development workflow with Octo.nvim
-   D. Enhancing collaboration and code quality through efficient code review
 
 VIII. Additional Recommendations for a Terminal-Centric Workflow
    A. Command-line tools for testing and debugging
